@@ -1,26 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban coLab</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #7B264A;
-        }
-        img {
-            width: 80%; /* 80% of the viewport width */
-            max-width: 800px; /* Caps at 800px */
-            height: auto; /* Maintains aspect ratio */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban coLab - Contact</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #7B264A;
+      color: #FFFFFF;
+    }
+    .logo {
+      margin-bottom: 20px;
+    }
+    .rollup {
+      cursor: pointer;
+      font-size: 16px;
+      font-family: 'Avenir Light', Helvetica, Arial, sans-serif;
+      font-weight: 300; /* Light weight */
+    }
+    .form-container {
+      display: none; /* Hidden by default */
+      text-align: center;
+      margin-top: 20px;
+    }
+    .form-container.active {
+      display: block; /* Shows when clicked */
+    }
+    input[type="text"], input[type="email"] {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid #FFFFFF;
+      color: #FFFFFF; /* White text */
+      padding: 10px;
+      width: 250px;
+      font-size: 14px;
+      outline: none;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-family: 'Avenir Light', Helvetica, Arial, sans-serif;
+      font-weight: 300; /* Light weight */
+    }
+    input[type="submit"] {
+      background: #FFFFFF;
+      color: #7B264A;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 4px;
+      font-family: 'Avenir Light', Helvetica, Arial, sans-serif;
+      font-weight: 300;
+    }
+    input[type="submit"]:hover {
+      background: #E0E0E0;
+    }
+    /* Load Avenir Light font */
+    @font-face {
+      font-family: 'Avenir Light';
+      src: url('Avenir-Light.ttf') format('truetype');
+      font-weight: 300;
+    }
+  </style>
 </head>
 <body>
-    <img src="UrbanCoLabText.png" alt="Urban coLab">
+  <div class="logo">
+    <img src="UrbanCoLabText.png" alt="Urban coLab" style="width: 80%; max-width: 800px; height: auto;">
+  </div>
+  <div class="rollup" onclick="toggleForm()">Say Hello</div>
+  <div class="form-container" id="contactForm">
+    <form id="BiginWebToRecordForm73007000000353694" method="POST" enctype="multipart/form-data" action="https://bigin.zoho.com.au/crm/WebToContactForm" target="hidden73007000000353694Frame" onsubmit="return checkMandatory73007000000353694()">
+      <!-- Hidden Bigin Fields -->
+      <input type="text" style="display:none;" name="xnQsjsdp" value="4344d72d1cb955f1072d348dc10922f183773da1308df4195778863496096cd2"/>
+      <input type="hidden" name="zc_gad" id="zc_gad" value=""/>
+      <input type="text" style="display:none;" name="xmIwtLD" value="984baeaa0e9bb612cd8db2e952ff6c01f5aa5226f8b1ede4d2c5d71291c1afaff9a3c0229c1a336e8216e92446557bbf"/>
+      <input type="text" style="display:none;" name="actionType" value="Q29udGFjdHM="/>
+      <input type="hidden" name="rmsg" id="rmsg" value="true"/>
+      <input type="text" style="display:none;" name="returnURL" value="https://urbancolab.com.au/contact.html"/>
+      <!-- Minimal Fields -->
+      <input type="text" name="First Name" placeholder="First" required maxlength="40"><br>
+      <input type="text" name="Last Name" placeholder="Last" required maxlength="80"><br>
+      <input type="email" name="Email" placeholder="Email" required maxlength="100"><br>
+      <input type="text" name="Mobile" placeholder="Mobile" required maxlength="30"><br>
+      <input type="submit" value="Connect">
+    </form>
+  </div>
+  <iframe id="hidden73007000000353694Frame" name="hidden73007000000353694Frame" style="display: none;"></iframe>
+
+  <script>
+    // Rollup Toggle
+    function toggleForm() {
+      const form = document.getElementById("contactForm");
+      form.classList.toggle("active");
+    }
+
+    // Bigin Validation
+    var mndFileds = ["First Name", "Last Name", "Email", "Mobile"];
+    var fldLangVal = ["First Name", "Last Name", "Email", "Mobile"];
+
+    function checkMandatory73007000000353694() {
+      var isReturn = true;
+      var form = document.getElementById("BiginWebToRecordForm73007000000353694");
+      for (var i = 0; i < mndFileds.length; i++) {
+        var fieldObj = form[mndFileds[i]];
+        if (fieldObj && ((fieldObj.value).trim().length === 0)) {
+          alert(fldLangVal[i] + " cannot be empty");
+          isReturn = false;
+        }
+      }
+      if (isReturn) {
+        document.querySelector("input[type='submit']").disabled = true;
+      }
+      return isReturn;
+    }
+  </script>
 </body>
 </html>
