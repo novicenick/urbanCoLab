@@ -17,25 +17,34 @@
     }
     .logo {
       margin-bottom: 20px;
+      text-align: center; /* Explicitly center the logo container */
+    }
+    .logo img {
+      width: 80%;
+      max-width: 1200px;
+      height: auto;
+      display: block; /* Remove inline spacing */
+      margin: 0 auto; /* Center the image itself */
     }
     .rollup {
       cursor: pointer;
       font-size: 16px;
       font-family: 'Avenir Light', Helvetica, Arial, sans-serif;
-      font-weight: 300; /* Light weight */
+      font-weight: 300;
+      text-align: center; /* Ensure text is centered */
     }
     .form-container {
-      display: none; /* Hidden by default */
+      display: none;
       text-align: center;
       margin-top: 20px;
     }
     .form-container.active {
-      display: block; /* Shows when clicked */
+      display: block;
     }
     input[type="text"], input[type="email"] {
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid #FFFFFF;
-      color: #FFFFFF; /* White text */
+      color: #FFFFFF;
       padding: 10px;
       width: 250px;
       font-size: 14px;
@@ -43,7 +52,10 @@
       border-radius: 4px;
       margin-bottom: 10px;
       font-family: 'Avenir Light', Helvetica, Arial, sans-serif;
-      font-weight: 300; /* Light weight */
+      font-weight: 300;
+      display: block; /* Ensure inputs are block-level */
+      margin-left: auto; /* Center inputs */
+      margin-right: auto;
     }
     input[type="submit"] {
       background: #FFFFFF;
@@ -55,11 +67,13 @@
       border-radius: 4px;
       font-family: 'Avenir Light', Helvetica, Arial, sans-serif;
       font-weight: 300;
+      display: block; /* Center submit button */
+      margin-left: auto;
+      margin-right: auto;
     }
     input[type="submit"]:hover {
       background: #E0E0E0;
     }
-    /* Load Avenir Light font */
     @font-face {
       font-family: 'Avenir Light';
       src: url('Avenir-Light.ttf') format('truetype');
@@ -69,19 +83,17 @@
 </head>
 <body>
   <div class="logo">
-    <img src="UrbanCoLabText.png" alt="Urban coLab" style="width: 80%; max-width: 800px; height: auto;">
+    <img src="UrbanCoLabText.png" alt="Urban coLab">
   </div>
   <div class="rollup" onclick="toggleForm()">Say Hello</div>
   <div class="form-container" id="contactForm">
     <form id="BiginWebToRecordForm73007000000353694" method="POST" enctype="multipart/form-data" action="https://bigin.zoho.com.au/crm/WebToContactForm" target="hidden73007000000353694Frame" onsubmit="return checkMandatory73007000000353694()">
-      <!-- Hidden Bigin Fields -->
       <input type="text" style="display:none;" name="xnQsjsdp" value="4344d72d1cb955f1072d348dc10922f183773da1308df4195778863496096cd2"/>
       <input type="hidden" name="zc_gad" id="zc_gad" value=""/>
       <input type="text" style="display:none;" name="xmIwtLD" value="984baeaa0e9bb612cd8db2e952ff6c01f5aa5226f8b1ede4d2c5d71291c1afaff9a3c0229c1a336e8216e92446557bbf"/>
       <input type="text" style="display:none;" name="actionType" value="Q29udGFjdHM="/>
       <input type="hidden" name="rmsg" id="rmsg" value="true"/>
       <input type="text" style="display:none;" name="returnURL" value="https://urbancolab.com.au/contact.html"/>
-      <!-- Minimal Fields -->
       <input type="text" name="First Name" placeholder="First" required maxlength="40"><br>
       <input type="text" name="Last Name" placeholder="Last" required maxlength="80"><br>
       <input type="email" name="Email" placeholder="Email" required maxlength="100"><br>
@@ -92,16 +104,12 @@
   <iframe id="hidden73007000000353694Frame" name="hidden73007000000353694Frame" style="display: none;"></iframe>
 
   <script>
-    // Rollup Toggle
     function toggleForm() {
       const form = document.getElementById("contactForm");
       form.classList.toggle("active");
     }
-
-    // Bigin Validation
     var mndFileds = ["First Name", "Last Name", "Email", "Mobile"];
     var fldLangVal = ["First Name", "Last Name", "Email", "Mobile"];
-
     function checkMandatory73007000000353694() {
       var isReturn = true;
       var form = document.getElementById("BiginWebToRecordForm73007000000353694");
