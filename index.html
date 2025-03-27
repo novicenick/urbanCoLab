@@ -17,21 +17,21 @@
     }
     .logo {
       margin-bottom: 20px;
-      text-align: center; /* Explicitly center the logo container */
+      text-align: center;
     }
     .logo img {
       width: 80%;
       max-width: 1200px;
       height: auto;
-      display: block; /* Remove inline spacing */
-      margin: 0 auto; /* Center the image itself */
+      display: block;
+      margin: 0 auto;
     }
     .rollup {
       cursor: pointer;
       font-size: 16px;
       font-family: 'Avenir Light', Helvetica, Arial, sans-serif;
       font-weight: 300;
-      text-align: center; /* Ensure text is centered */
+      text-align: center;
     }
     .form-container {
       display: none;
@@ -39,6 +39,17 @@
       margin-top: 20px;
     }
     .form-container.active {
+      display: block;
+    }
+    .acknowledgment {
+      display: none;
+      font-size: 14px;
+      font-family: 'Avenir Light', Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .acknowledgment.active {
       display: block;
     }
     input[type="text"], input[type="email"] {
@@ -53,8 +64,8 @@
       margin-bottom: 10px;
       font-family: 'Avenir Light', Helvetica, Arial, sans-serif;
       font-weight: 300;
-      display: block; /* Ensure inputs are block-level */
-      margin-left: auto; /* Center inputs */
+      display: block;
+      margin-left: auto;
       margin-right: auto;
     }
     input[type="submit"] {
@@ -67,7 +78,7 @@
       border-radius: 4px;
       font-family: 'Avenir Light', Helvetica, Arial, sans-serif;
       font-weight: 300;
-      display: block; /* Center submit button */
+      display: block;
       margin-left: auto;
       margin-right: auto;
     }
@@ -93,7 +104,7 @@
       <input type="text" style="display:none;" name="xmIwtLD" value="984baeaa0e9bb612cd8db2e952ff6c01f5aa5226f8b1ede4d2c5d71291c1afaff9a3c0229c1a336e8216e92446557bbf"/>
       <input type="text" style="display:none;" name="actionType" value="Q29udGFjdHM="/>
       <input type="hidden" name="rmsg" id="rmsg" value="true"/>
-      <input type="text" style="display:none;" name="returnURL" value="https://urbancolab.com.au/contact.html"/>
+      <input type="text" style="display:none;" name="returnURL" value="https://urbancolab.com.au/contact.html?sent=true"/>
       <input type="text" name="First Name" placeholder="First" required maxlength="40"><br>
       <input type="text" name="Last Name" placeholder="Last" required maxlength="80"><br>
       <input type="email" name="Email" placeholder="Email" required maxlength="100"><br>
@@ -101,13 +112,17 @@
       <input type="submit" value="Connect">
     </form>
   </div>
+  <div class="acknowledgment" id="ackMessage">Nice to meet you!</div>
   <iframe id="hidden73007000000353694Frame" name="hidden73007000000353694Frame" style="display: none;"></iframe>
 
   <script>
+    // Rollup Toggle
     function toggleForm() {
       const form = document.getElementById("contactForm");
       form.classList.toggle("active");
     }
+
+    // Bigin Validation
     var mndFileds = ["First Name", "Last Name", "Email", "Mobile"];
     var fldLangVal = ["First Name", "Last Name", "Email", "Mobile"];
     function checkMandatory73007000000353694() {
@@ -125,6 +140,16 @@
       }
       return isReturn;
     }
+
+    // Acknowledgment on Redirect
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("sent") === "true") {
+        document.getElementById("contactForm").style.display = "none";
+        document.getElementById("ackMessage").classList.add("active");
+        document.querySelector(".rollup").style.display = "none"; /* Hide Say Hello */
+      }
+    };
   </script>
 </body>
 </html>
