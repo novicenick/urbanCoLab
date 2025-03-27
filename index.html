@@ -94,7 +94,7 @@
 </head>
 <body>
   <div class="logo">
-    <img src="UrbanCoLabText.png" alt="Urban coLab">
+    <img src="UrbanCoLabTextpng" alt="Urban coLab">
   </div>
   <div class="rollup" onclick="toggleForm()">Say Hello!</div>
   <div class="form-container" id="contactForm">
@@ -104,7 +104,7 @@
       <input type="text" style="display:none;" name="xmIwtLD" value="984baeaa0e9bb612cd8db2e952ff6c01f5aa5226f8b1ede4d2c5d71291c1afaff9a3c0229c1a336e8216e92446557bbf"/>
       <input type="text" style="display:none;" name="actionType" value="Q29udGFjdHM="/>
       <input type="hidden" name="rmsg" id="rmsg" value="true"/>
-      <input type="text" style="display:none;" name="returnURL" value="https://urbancolab.com.au/contact.html?sent=true"/>
+      <input type="text" style="display:none;" name="returnURL" value="https://urbancolab.com.au/contact.html"/>
       <input type="text" name="First Name" placeholder="First" required maxlength="40"><br>
       <input type="text" name="Last Name" placeholder="Last" required maxlength="80"><br>
       <input type="email" name="Email" placeholder="Email" required maxlength="100"><br>
@@ -112,7 +112,7 @@
       <input type="submit" value="Connect">
     </form>
   </div>
-  <div class="acknowledgment" id="ackMessage">Nice to meet you!</div>
+  <div class="acknowledgment" id="ackMessage">Nice to meet you.</div>
   <iframe id="hidden73007000000353694Frame" name="hidden73007000000353694Frame" style="display: none;"></iframe>
 
   <script>
@@ -137,19 +137,17 @@
       }
       if (isReturn) {
         document.querySelector("input[type='submit']").disabled = true;
+        showAcknowledgment(); // Show acknowledgment on successful validation
       }
       return isReturn;
     }
 
-    // Acknowledgment on Redirect
-    window.onload = function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get("sent") === "true") {
-        document.getElementById("contactForm").style.display = "none";
-        document.getElementById("ackMessage").classList.add("active");
-        document.querySelector(".rollup").style.display = "none"; /* Hide Say Hello */
-      }
-    };
+    // Show Acknowledgment
+    function showAcknowledgment() {
+      document.getElementById("contactForm").style.display = "none";
+      document.getElementById("ackMessage").classList.add("active");
+      document.querySelector(".rollup").style.display = "none";
+    }
   </script>
 </body>
 </html>
