@@ -1,153 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
-  <title>Urban coLab - Contact</title>
+  <meta charset="utf-8">
+  <title>Urban coLab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.prod.website-files.com/680c776850b560d204430f74/css/urban-colab-37bd00.webflow.shared.801c173d8.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://cdn.prod.website-files.com/680c776850b560d204430f74/680e20205f6ecba6da144429_Untitled%20design%20(3)%20(1).png" rel="shortcut icon" type="image/x-icon">
+  <link href="https://cdn.prod.website-files.com/680c776850b560d204430f74/680e206c3446ace65a689930_Untitled%20design%20(3)%20(2).png" rel="apple-touch-icon">
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: #7B264A;
-      color: #FFFFFF;
+    .hero { 
+      height: 100vh; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      text-align: center; 
     }
-    .logo {
-      margin-bottom: 20px;
-      text-align: center;
+    .hero .heading { 
+      color: white; 
     }
-    .logo img {
-      width: 80%;
-      max-width: 1200px;
-      height: auto;
-      display: block;
-      margin: 0 auto;
+    .swiper { 
+      width: 100%; 
     }
-    .rollup {
-      cursor: pointer;
-      font-size: 16px;
-      font-family: 'Lato', Helvetica, Arial, sans-serif;
-      font-weight: 300;
-      text-align: center;
+    .swiper-slide { 
+      display: flex; 
+      justify-content: center; 
     }
-    .form-container {
-      display: none;
-      text-align: center;
-      margin-top: 20px;
-    }
-    .form-container.active {
-      display: block;
-    }
-    .acknowledgment {
-      display: none;
-      font-size: 14px;
-      font-family: 'Lato', Helvetica, Arial, sans-serif;
-      font-weight: 300;
-      text-align: center;
-      margin-top: 20px;
-    }
-    .acknowledgment.active {
-      display: block;
-    }
-    input[type="text"], input[type="email"] {
-      background: transparent;
-      border: 1px solid #FFFFFF;
-      color: #FFFFFF;
-      padding: 10px;
-      width: 250px;
-      font-size: 14px;
-      outline: none;
-      border-radius: 4px;
-      margin-bottom: 10px;
-      font-family: 'Lato', Helvetica, Arial, sans-serif;
-      font-weight: 300;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    input[type="text"]::placeholder, input[type="email"]::placeholder {
-      color: #FFFFFF;
-      opacity: 0.8; /* Slightly dim for distinction */
-    }
-    input[type="submit"] {
-      background: #FFFFFF;
-      color: #7B264A;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 14px;
-      border-radius: 4px;
-      font-family: 'Lato', Helvetica, Arial, sans-serif;
-      font-weight: 600;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    input[type="submit"]:hover {
-      background: #E0E0E0;
+    @media (max-width: 767px) {
+      .services .swiper-slide, .team .swiper-slide { 
+        width: 100%; 
+      }
     }
   </style>
 </head>
 <body>
-  <div class="logo">
-    <img src="UrbanCoLabText.png" alt="Urban coLab">
-  </div>
-  <div class="rollup" onclick="toggleForm()">Say Hello!</div>
-  <div class="form-container" id="contactForm">
-    <form id="BiginWebToRecordForm68105000000353003" method="POST" enctype="multipart/form-data" action="https://bigin.zoho.com.au/crm/WebToContactForm" target="hidden68105000000353003Frame" onsubmit="return checkMandatory68105000000353003()">
-      <input type="text" style="display:none;" name="xnQsjsdp" value="36c1a2ab9fbb3744b352fed8271fdf96e8d77a7224c132ce160b67fb9f843db6"/>
-      <input type="hidden" name="zc_gad" id="zc_gad" value=""/>
-      <input type="text" style="display:none;" name="xmIwtLD" value="369302a1825cd1ebd115afda761d3035f937df52e1b61aa69e36eef7d55d03106d52f334cb39ddd43a391fb163c7428d"/>
-      <input type="text" style="display:none;" name="actionType" value="Q29udGFjdHM="/>
-      <input type="hidden" name="rmsg" id="rmsg" value="true"/>
-      <input type="text" style="display:none;" name="returnURL" value="https://urbancolab.com.au/contact.html"/>
-      <input type="text" name="First Name" placeholder="First" required maxlength="40"><br>
-      <input type="text" name="Last Name" placeholder="Last" required maxlength="80"><br>
-      <input type="email" name="Email" placeholder="Email" required maxlength="100"><br>
-      <input type="text" name="Mobile" placeholder="Mobile" required maxlength="30"><br>
-      <input type="submit" value="Hello!">
-    </form>
-  </div>
-  <div class="acknowledgment" id="ackMessage">Nice to meet you. We'll be in touch soon.</div>
-  <iframe id='hidden68105000000353003Frame' name='hidden68105000000353003Frame' style="display: none;"></iframe>
+  <div class="page-wrapper">
+    <section class="hero">
+      <div class="container">
+        <h1 class="heading">Urban coLab</h1>
+      </div>
+    </section>
 
+    <section class="hero-heading-left">
+      <div class="container">
+        <div class="hero-wrapper">
+          <div class="hero-split">
+            <h1 class="heading-2">At Urban coLab</h1>
+            <p class="paragraph">We are passionate about co-creating urban spaces that matter. Together, we aim to shape meaningful places today and lasting legacies for tomorrow.</p>
+          </div>
+          <div class="hero-split">
+            <img src="https://cdn.prod.website-files.com/680c776850b560d204430f74/680e077674d687afe2490e49_Untitled%20design.png" loading="lazy" alt="" class="shadow-two">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero-heading-left white">
+      <div class="container">
+        <div class="hero-wrapper gap">
+          <div class="hero-split gap size">
+            <h1 class="heading-2">Collective<br>Collaboration<br>Co Creation</h1>
+            <img src="https://cdn.prod.website-files.com/680c776850b560d204430f74/680e092cbee7dc598ebfd767_Untitled%20design%20(1).png" loading="lazy" alt="" class="shadow-two">
+            <img src="https://cdn.prod.website-files.com/680c776850b560d204430f74/680e220fd3c0ca2155ddc2b1_Untitled%20design%20(4).png" loading="lazy" alt="" class="absolute">
+          </div>
+          <div class="hero-split small">
+            <p class="paragraph">
+              The <span class="black">collective</span> is our strength. We connect diverse voices from a deep pool of relationships spanning public and private sectors.<br><br>
+              <span class="black">Collaboration is at our core.</span> We unite teams to foster a sense of belonging and shared purpose.<br><br>
+              Through <span class="black">co-creation we build trust.</span> We partner with clients to craft vision-led, community-centered solutions, ensuring every project is a shared journey.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero-heading-left">
+      <div class="container">
+        <div class="hero-wrapper">
+          <div class="hero-split">
+            <img src="https://cdn.prod.website-files.com/680c776850b560d204430f74/680e0ee37278b6c273e4981c_Urban%20coLab%20(1).png" loading="lazy" alt="" class="shadow-two">
+          </div>
+          <div class="hero-split">
+            <h1 class="heading-2">Our Services bring projects to life:</h1>
+            <p class="paragraph">We align stakeholders to kickstart initiatives with clarity and energy, equip teams with the tools and skills to sustain progress and provide strategic guidance to shape places that inspire and endure.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero-heading-left white services">
+      <div class="container">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="texts">
+                <div class="_32px">Strategic Partnerships & Relationship Management</div>
+                <div class="_22px">We specialize in advocacy, government relations, and stakeholder engagement. Our in-house team can secure grants, facilitate workshops, and connect diverse groups. We create value by bringing private and public sectors and communities together to ensure alignment, build a shared vision, and maintain project momentum.<br><br>We call on trusted external partners to complement our efforts and deliver activations and communications, reinforcing our belief that partnerships unlock true value.</div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="texts">
+                <div class="_32px">Governance & Capability Development</div>
+                <div class="_22px">We provide frameworks, systems, and processes to guide projects through their later stages, focusing on risk management, peer review, and independent chair services to ensure transparency and accountability.<br><br>We craft tailored solutions to build long-term capability through leadership, team building, and mentoring, equipping teams to adapt and succeed despite uncertainty. We collaborate with external partners for specialised support including executive coaching and business case assurance.</div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="texts">
+                <div class="_32px">Place, Property & Development Advisory</div>
+                <div class="_22px">We provide strategic guidance that anticipates opportunities and risks to successfully execute complex projects. We provide leadership and direction to craft cohesive project approach, keeping the vision at the core while aligning with broader urban goals. Our team contributes to later stages by developing frameworks to guide implementation and commercial delivery, ensuring the initial vision endures.<br><br>For technical expertise, such as project management, planning, technical studies, data analytics, or country expertise, we partner with trusted partners, reflecting our belief that collaboration drives value.</div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero-heading-left green team">
+      <div class="container">
+        <h1 class="heading-2 white">Our Team</h1>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="hero-split image-and-text">
+                <div class="image-wrapper">
+                  <img src="https://cdn.prod.website-files.com/680c776850b560d204430f74/680e1429b555e630d8014445_5342d9e9c7f5d2ab071fcf15f3e35edd.jpg" loading="lazy" alt="">
+                </div>
+                <p class="paragraph _22">
+                  <span class="bold">Nick Chandler</span> has a track record of leading housing and construction operations across Greater Sydney. With over two decades of leadership in property development, Nick has consistently delivered organizational transformation and sustainable growth, most notably as Managing Director of Rawson Group (2020-2023), where he navigated challenging market conditions while positioning the business for new markets. His approach combines strategic vision with practical implementation, drawing on extensive experience across development management and technology adoption. Throughout his career at Landcom, WeLive, and Lendlease, Nick has built lasting industry partnerships and maintained an unwavering focus on creating sustainable value for both stakeholders and communities.
+                </p>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="hero-split image-and-text">
+                <div class="image-wrapper">
+                  <img src="https://cdn.prod.website-files.com/680c776850b560d204430f74/680e14a966f6511b2375aadd_33849bc9ce41ad3c12a7ca8ba0d8f380.jpg" loading="lazy" alt="">
+                </div>
+                <p class="paragraph _22">
+                  <span class="bold">Vy Nguyen</span> brings more than 20 years of development strategy expertise across NSW and Canada to complex urban challenges. A dynamic leader known for engineering innovative solutions, Vy excels at navigating government partnerships and regulatory frameworks while building high-performing teams. Her intuitive approach to critical thinking and proven track record in execution have delivered exceptional outcomes across major government agencies, including Landcom, Infrastructure NSW, Barangaroo Delivery Authority, Property & Development NSW, and British Columbia Housing. Vy’s commitment to excellence combines deep industry knowledge with strategic vision, consistently achieving results that transform both built environments and the communities they serve. In 2024, Vy was awarded the UDIA NSW Professional Development Volunteer Presenter Award for Excellence.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer">
+      <div class="container">
+        <div class="hero-wrapper reverse">
+          <div class="hero-split">
+            <h1 class="heading-2"><em>Let's work together</em></h1>
+            <div class="address-and-email-wrapper">
+              <div class="address-wrapper">
+                <div class="_32px">Email</div>
+                <a href="mailto:info@urbancolab.com.au" class="_22px">info@urbancolab.com.au</a>
+              </div>
+              <div class="address-wrapper">
+                <div class="_32px">Address</div>
+                <div class="_22px">Level 12, 90 Pitt Street<br>Sydney NSW</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-split center">
+            <img src="https://cdn.prod.website-files.com/680c776850b560d204430f74/680e1d6036d2805263fb51c9_Urban%20coLab%20(3).png" loading="lazy" alt="" class="shadow-two small">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script>
-    // Rollup Toggle
-    function toggleForm() {
-      const form = document.getElementById("contactForm");
-      form.classList.toggle("active");
-    }
-
-    // Bigin Validation
-    var mndFileds = ["First Name", "Last Name", "Email", "Mobile"];
-    var fldLangVal = ["First Name", "Last Name", "Email", "Mobile"];
-    function checkMandatory68105000000353003() {
-      var isReturn = true;
-      var form = document.getElementById("BiginWebToRecordForm68105000000353003");
-      for (var i = 0; i < mndFileds.length; i++) {
-        var fieldObj = form[mndFileds[i]];
-        if (fieldObj && ((fieldObj.value).trim().length === 0)) {
-          alert(fldLangVal[i] + " cannot be empty");
-          isReturn = false;
-        }
+    const servicesSwiper = new Swiper('.services .swiper', {
+      slidesPerView: 3,
+      spaceBetween: 20,
+      pagination: { el: '.services .swiper-pagination', clickable: true },
+      breakpoints: {
+        767: { slidesPerView: 1 }
       }
-      if (isReturn) {
-        document.querySelector("input[type='submit']").disabled = true;
-        showAcknowledgment(); // Show acknowledgment on successful validation
-      }
-      return isReturn;
-    }
+    });
 
-    // Show Acknowledgment
-    function showAcknowledgment() {
-      document.getElementById("contactForm").style.display = "none";
-      document.getElementById("ackMessage").classList.add("active");
-      document.querySelector(".rollup").style.display = "none";
-    }
+    const teamSwiper = new Swiper('.team .swiper', {
+      slidesPerView: 2,
+      spaceBetween: 20,
+      pagination: { el: '.team .swiper-pagination', clickable: true },
+      breakpoints: {
+        767: { slidesPerView: 1 }
+      }
+    });
   </script>
 </body>
 </html>
