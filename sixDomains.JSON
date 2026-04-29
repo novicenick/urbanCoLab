@@ -1,0 +1,72 @@
+{
+  "framework": "Vision & Place Framework",
+  "description": "Urban coLab - Proprietary Playbook",
+  "centre": {
+    "id": "vision-place",
+    "name": "Vision & Place",
+    "corePurpose": "Define the shared place vision that anchors every domain and keeps commercial, planning, delivery, management, community, and policy decisions aligned.",
+    "keyInsight": "The centre is the organising idea of the framework: a clear place vision gives every domain a common test for quality, trade-offs, partnership confidence, and long-term stewardship."
+  },
+  "domains": [
+    {
+      "id": 1,
+      "name": "Commercial Domain",
+      "corePurpose": "Create enduring, risk-adjusted economic value that survives market cycles and delivers measurable investor confidence.",
+      "pitchDeckContribution": "Clear, credible value proposition and investor language that explains \"why this makes commercial sense\" - translating public inputs into private returns.",
+      "keyInsight": "We deliberately build a \"Value Bridge\" that converts government infrastructure, approvals, and de-risking into quantifiable IRR uplift for private partners. Chasing maximum density often destroys absorption velocity; a 1% improvement in net operating income is frequently worth more than a 5% reduction in construction cost.",
+      "signatureDeliverables": "Investment-grade Business Case with sensitivity tables, Value-Uplift Allocation Model, Commercial Stress-Test Report (base/adverse/upside scenarios).",
+      "proprietaryTools": "Value Bridge Matrix, Investor Readiness Diagnostic (25-question scorecard), Margin Resilience Model (tests 15% cost and 24-month delay shocks).",
+      "successMetrics": "Equity IRR >= benchmark + risk premium, Development margin 18-22% (project-specific), Capital attraction velocity (time to term sheet)."
+    },
+    {
+      "id": 2,
+      "name": "Planning Domain",
+      "corePurpose": "Deliver masterplanning, urban design excellence, and regulatory pathways that are ambitious yet approvable and future-proof.",
+      "pitchDeckContribution": "The \"why this place will work\" narrative - technical excellence, regulatory achievability, and urban design quality explained in accessible, compelling terms.",
+      "keyInsight": "Planning is never just a technical exercise; it is the most powerful storytelling tool we have. Front-loading \"approvability testing\" and designing for regulatory arbitrage delivers better outcomes with fewer controls - the best plans feel inevitable in hindsight but required deliberate trade-off discipline upfront.",
+      "signatureDeliverables": "Place-Based Planning Canvas (one-page integration map), Regulatory Pathway Optimisation Strategy, Design Excellence + Deliverability Guidelines.",
+      "proprietaryTools": "Planning Pressure-Test Workshop (4-hour fatal-flaw surfacing session), Urban Design Decision Matrix (single scorecard weighing amenity, density, activation, and cost).",
+      "successMetrics": "Approval timelines achieved, Design quality scores, Infrastructure integration index, Compliance with emerging policy targets."
+    },
+    {
+      "id": 3,
+      "name": "Delivery Domain",
+      "corePurpose": "Convert approved plans into physical reality on time, on budget, and without compromising the original vision.",
+      "pitchDeckContribution": "The \"how we will actually deliver this\" reassurance - clear staging, early activation, and momentum-building stories that address the universal stakeholder fear of non-delivery.",
+      "keyInsight": "The strongest projects are \"over-planned\" on staging, procurement, and early works from day one. Treating delivery as a design constraint (not an after-thought) prevents the vision from being eroded during construction.",
+      "signatureDeliverables": "Integrated Delivery Roadmap with explicit decision gates, Procurement & Packaging Strategy, Early Activation & Catalyst Plan.",
+      "proprietaryTools": "Delivery Risk Gateway Process (six mandatory checkpoints), Phasing Optimisation Engine (balances cashflow, risk, and market response).",
+      "successMetrics": "On-time / on-budget delivery rate, Milestone achievement, Cost certainty, Safety and quality performance."
+    },
+    {
+      "id": 4,
+      "name": "Management Domain (Governance & Stewardship)",
+      "corePurpose": "Maintain alignment, decision quality, and vision integrity over multi-year (often decade-long) project lifecycles.",
+      "pitchDeckContribution": "The governance and stewardship story - \"how we will stay on track, protect the vision, and adapt together.\"",
+      "keyInsight": "Most failed partnerships do not die from bad faith - they die from governance structures built for the easy times. Strong governance is the ultimate proof point that the vision is not just words on a page.",
+      "signatureDeliverables": "Joint Governance Charter with clear escalation paths, Adaptive Management Playbook, Vision Integrity Scorecard (quarterly health check).",
+      "proprietaryTools": "Governance Effectiveness Diagnostic (scored across 8 dimensions), Scenario Planning Toolkit, Vision Guardianship Protocol.",
+      "successMetrics": "Governance maturity score, Stakeholder satisfaction and alignment metrics, Vision integrity maintained over time, Adaptability to change."
+    },
+    {
+      "id": 5,
+      "name": "Community Experience Domain",
+      "corePurpose": "Create places that people actively choose, defend, and take pride in - turning stakeholders into long-term advocates rather than passive recipients.",
+      "pitchDeckContribution": "The human, lived-experience narrative that connects the project to real lives, aspirations, and belonging.",
+      "keyInsight": "The highest-value community outcomes are rarely the loudest demands - they are the quiet needs discovered through deliberate, repeated co-creation. Social licence is a leading indicator, not a lagging risk.",
+      "signatureDeliverables": "Experience Blueprint & Activation Strategy, Social Licence Trajectory Map, Community Stewardship Model.",
+      "proprietaryTools": "Co-Creation Workshop Series (structured 5-stage methodology), Social Licence Index (quantitative tracking), Experience Journey Mapping (pre- and post-occupancy).",
+      "successMetrics": "Community Net Promoter Score, Activation and usage rates, Diversity & inclusion metrics, Long-term stewardship commitment."
+    },
+    {
+      "id": 6,
+      "name": "Policy & Strategic Alignment Domain",
+      "corePurpose": "Explicitly align the Vision & Place with current and emerging government policy objectives, funding priorities, and strategic agendas.",
+      "pitchDeckContribution": "The powerful \"this project advances government priorities\" narrative - housing supply, service delivery, economic growth, sustainability, regional development, etc.",
+      "keyInsight": "This domain is the bridge that translates the project vision into language that resonates with ministers, departments, funding bodies, and political stakeholders. It must be repeatedly stress-tested and refreshed as policy landscapes evolve.",
+      "signatureDeliverables": "Policy Alignment Matrix, Government Objectives Mapping, Strategic Narrative Briefs.",
+      "proprietaryTools": "Policy Alignment Diagnostic + Narrative Stress-Test Workshop.",
+      "successMetrics": "Demonstrable contribution to key government targets, Speed of policy-level approvals, Stakeholder feedback on strategic fit."
+    }
+  ]
+}

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision & Place Framework</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            padding: 24px;
+            background: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .framework {
+            position: relative;
+            width: min(100%, 760px);
+        }
+
+        svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .outer-ring,
+        .segment,
+        .core,
+        .leader,
+        .callout {
+            transition: fill 180ms ease, stroke 180ms ease, stroke-width 180ms ease, filter 180ms ease, opacity 180ms ease;
+        }
+
+        .outer-ring {
+            cursor: pointer;
+            fill: none;
+            stroke: #a8d36d;
+            stroke-width: 19;
+        }
+
+        .outer-ring:hover {
+            stroke: #94c858;
+            stroke-width: 23;
+            filter: drop-shadow(0 0 7px rgba(148, 200, 88, 0.45));
+        }
+
+        .segment {
+            cursor: pointer;
+            fill: #d79cc8;
+            outline: none;
+            stroke: #ffffff;
+            stroke-linejoin: round;
+            stroke-width: 5;
+        }
+
+        .segment:hover {
+            fill: #e3afd6;
+            filter: drop-shadow(0 3px 7px rgba(92, 6, 59, 0.25));
+        }
+
+        .segment.is-active {
+            fill: #e7b7db;
+            filter: drop-shadow(0 4px 10px rgba(92, 6, 59, 0.3));
+        }
+
+        .core {
+            cursor: pointer;
+            fill: #5c063b;
+            outline: none;
+            stroke: #ffffff;
+            stroke-width: 4;
+        }
+
+        .core:hover {
+            fill: #710b4c;
+            filter: drop-shadow(0 4px 8px rgba(92, 6, 59, 0.35));
+        }
+
+        .core.is-active {
+            fill: #710b4c;
+            filter: drop-shadow(0 4px 10px rgba(92, 6, 59, 0.38));
+        }
+
+        .segment-label,
+        .core-label,
+        .callout {
+            text-anchor: middle;
+        }
+
+        .segment-label,
+        .core-label {
+            pointer-events: none;
+        }
+
+        .segment-label {
+            fill: #111111;
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        .core-label {
+            fill: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .callout {
+            fill: #00777d;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .leader {
+            stroke: #a8d36d;
+            stroke-width: 1;
+        }
+
+        .callout-group {
+            cursor: pointer;
+        }
+
+        .callout-group:hover .leader {
+            stroke: #94c858;
+            stroke-width: 2;
+        }
+
+        .callout-group:hover .callout {
+            fill: #005e63;
+            filter: drop-shadow(0 1px 2px rgba(0, 119, 125, 0.2));
+        }
+
+        .domain-card {
+            position: absolute;
+            z-index: 4;
+            top: 50%;
+            left: 50%;
+            width: min(680px, calc(100vw - 48px));
+            padding: 20px;
+            overflow: visible;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(92, 6, 59, 0.18);
+            border-radius: 8px;
+            box-shadow: 0 18px 46px rgba(35, 16, 30, 0.22);
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -46%) scale(0.98);
+            transition: opacity 160ms ease, transform 160ms ease;
+        }
+
+        .domain-card.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .domain-card__header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .domain-card h2 {
+            flex: 1;
+            margin: 0;
+            color: #5c063b;
+            font-size: 18px;
+            line-height: 1.2;
+        }
+
+        .domain-card__close {
+            width: 28px;
+            height: 28px;
+            border: 0;
+            border-radius: 50%;
+            background: #f3e4ef;
+            color: #5c063b;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .domain-card__section + .domain-card__section {
+            margin-top: 12px;
+        }
+
+        .domain-card h3 {
+            margin: 0 0 3px;
+            color: #00777d;
+            font-size: 10px;
+            letter-spacing: 0.04em;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .domain-card p {
+            margin: 0;
+            color: #222222;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding: 12px;
+            }
+
+            .segment-label {
+                font-size: 8px;
+            }
+
+            .callout {
+                font-size: 7px;
+            }
+
+            .domain-card {
+                position: static;
+                width: 100%;
+                margin-top: 12px;
+                transform: translateY(8px);
+            }
+
+            .domain-card.is-visible {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="framework" aria-label="Vision and Place framework diagram">
+        <svg viewBox="0 0 460 390" role="img" aria-labelledby="diagram-title diagram-desc" xmlns="http://www.w3.org/2000/svg">
+            <title id="diagram-title">Vision and Place framework</title>
+            <desc id="diagram-desc">A circular six-part framework with Vision and Place at the centre, surrounded by community, policy alignment, commercial, planning, delivery, and management segments. Four outer callouts identify knowledge sharing, clients and partners, the Urban coLab team, and outcome and risk optimisation.</desc>
+
+            <g transform="translate(230 195)">
+                <circle class="outer-ring" cx="0" cy="0" r="178" />
+
+                <path class="segment" data-domain-id="5" tabindex="0" role="button" d="M -78.5 -135.97 A 157 157 0 0 1 78.5 -135.97 L 32 -55.43 A 64 64 0 0 0 -32 -55.43 Z" />
+                <path class="segment" data-domain-id="6" tabindex="0" role="button" d="M 78.5 -135.97 A 157 157 0 0 1 157 0 L 64 0 A 64 64 0 0 0 32 -55.43 Z" />
+                <path class="segment" data-domain-id="1" tabindex="0" role="button" d="M 157 0 A 157 157 0 0 1 78.5 135.97 L 32 55.43 A 64 64 0 0 0 64 0 Z" />
+                <path class="segment" data-domain-id="2" tabindex="0" role="button" d="M 78.5 135.97 A 157 157 0 0 1 -78.5 135.97 L -32 55.43 A 64 64 0 0 0 32 55.43 Z" />
+                <path class="segment" data-domain-id="3" tabindex="0" role="button" d="M -78.5 135.97 A 157 157 0 0 1 -157 0 L -64 0 A 64 64 0 0 0 -32 55.43 Z" />
+                <path class="segment" data-domain-id="4" tabindex="0" role="button" d="M -157 0 A 157 157 0 0 1 -78.5 -135.97 L -32 -55.43 A 64 64 0 0 0 -64 0 Z" />
+
+                <circle class="core" data-centre-card tabindex="0" role="button" cx="0" cy="0" r="64" />
+
+                <text class="segment-label" data-domain-label="5" x="0" y="-108">
+                    <tspan x="0" dy="0">Community</tspan>
+                </text>
+
+                <text class="segment-label" data-domain-label="6" x="96" y="-61">
+                    <tspan x="96" dy="0">Policy</tspan>
+                    <tspan x="96" dy="10">Alignment</tspan>
+                </text>
+
+                <text class="segment-label" data-domain-label="1" x="96" y="60">
+                    <tspan x="96" dy="0">Commercial</tspan>
+                </text>
+
+                <text class="segment-label" data-domain-label="2" x="0" y="114">
+                    <tspan x="0" dy="0">Planning</tspan>
+                </text>
+
+                <text class="segment-label" data-domain-label="3" x="-96" y="60">
+                    <tspan x="-96" dy="0">Delivery</tspan>
+                </text>
+
+                <text class="segment-label" data-domain-label="4" x="-96" y="-53">
+                    <tspan x="-96" dy="0">Management</tspan>
+                </text>
+
+                <text class="core-label" x="0" y="5">Vision &amp; Place</text>
+            </g>
+
+            <g class="callout-group">
+                <line class="leader" x1="97" y1="76" x2="56" y2="28" />
+                <text class="callout" x="39" y="18">
+                    <tspan x="39" dy="0">Shared knowledge</tspan>
+                    <tspan x="39" dy="10">and expertise</tspan>
+                </text>
+            </g>
+
+            <g class="callout-group">
+                <line class="leader" x1="363" y1="76" x2="405" y2="28" />
+                <text class="callout" x="397" y="9">
+                    <tspan x="397" dy="0">Our Clients,</tspan>
+                    <tspan x="397" dy="10">Government, Partners</tspan>
+                    <tspan x="397" dy="10">&amp; Communities</tspan>
+                </text>
+            </g>
+
+            <g class="callout-group">
+                <line class="leader" x1="97" y1="314" x2="56" y2="362" />
+                <text class="callout" x="56" y="372">
+                    <tspan x="56" dy="0">Urban coLab Team</tspan>
+                </text>
+            </g>
+
+            <g class="callout-group">
+                <line class="leader" x1="363" y1="314" x2="405" y2="362" />
+                <text class="callout" x="405" y="368">
+                    <tspan x="405" dy="0">Outcomes and risk</tspan>
+                    <tspan x="405" dy="10">optimisation</tspan>
+                </text>
+            </g>
+        </svg>
+
+        <aside class="domain-card" id="domain-card" aria-live="polite" aria-hidden="true">
+            <div class="domain-card__header">
+                <h2 id="domain-card-title"></h2>
+                <button class="domain-card__close" type="button" aria-label="Close domain card">&times;</button>
+            </div>
+            <div id="domain-card-content"></div>
+        </aside>
+    </main>
+
+    <script>
+        const fallbackDomainData = {
+            framework: "Vision & Place Framework",
+            description: "Urban coLab - Proprietary Playbook",
+            centre: {
+                id: "vision-place",
+                name: "Vision & Place",
+                corePurpose: "Define the shared place vision that anchors every domain and keeps commercial, planning, delivery, management, community, and policy decisions aligned.",
+                keyInsight: "The centre is the organising idea of the framework: a clear place vision gives every domain a common test for quality, trade-offs, partnership confidence, and long-term stewardship."
+            },
+            domains: [
+                {
+                    id: 1,
+                    name: "Commercial Domain",
+                    corePurpose: "Create enduring, risk-adjusted economic value that survives market cycles and delivers measurable investor confidence.",
+                    pitchDeckContribution: "Clear, credible value proposition and investor language that explains \"why this makes commercial sense\" - translating public inputs into private returns.",
+                    keyInsight: "We deliberately build a \"Value Bridge\" that converts government infrastructure, approvals, and de-risking into quantifiable IRR uplift for private partners. Chasing maximum density often destroys absorption velocity; a 1% improvement in net operating income is frequently worth more than a 5% reduction in construction cost.",
+                    signatureDeliverables: "Investment-grade Business Case with sensitivity tables, Value-Uplift Allocation Model, Commercial Stress-Test Report (base/adverse/upside scenarios).",
+                    proprietaryTools: "Value Bridge Matrix, Investor Readiness Diagnostic (25-question scorecard), Margin Resilience Model (tests 15% cost and 24-month delay shocks).",
+                    successMetrics: "Equity IRR >= benchmark + risk premium, Development margin 18-22% (project-specific), Capital attraction velocity (time to term sheet)."
+                },
+                {
+                    id: 2,
+                    name: "Planning Domain",
+                    corePurpose: "Deliver masterplanning, urban design excellence, and regulatory pathways that are ambitious yet approvable and future-proof.",
+                    pitchDeckContribution: "The \"why this place will work\" narrative - technical excellence, regulatory achievability, and urban design quality explained in accessible, compelling terms.",
+                    keyInsight: "Planning is never just a technical exercise; it is the most powerful storytelling tool we have. Front-loading \"approvability testing\" and designing for regulatory arbitrage delivers better outcomes with fewer controls - the best plans feel inevitable in hindsight but required deliberate trade-off discipline upfront.",
+                    signatureDeliverables: "Place-Based Planning Canvas (one-page integration map), Regulatory Pathway Optimisation Strategy, Design Excellence + Deliverability Guidelines.",
+                    proprietaryTools: "Planning Pressure-Test Workshop (4-hour fatal-flaw surfacing session), Urban Design Decision Matrix (single scorecard weighing amenity, density, activation, and cost).",
+                    successMetrics: "Approval timelines achieved, Design quality scores, Infrastructure integration index, Compliance with emerging policy targets."
+                },
+                {
+                    id: 3,
+                    name: "Delivery Domain",
+                    corePurpose: "Convert approved plans into physical reality on time, on budget, and without compromising the original vision.",
+                    pitchDeckContribution: "The \"how we will actually deliver this\" reassurance - clear staging, early activation, and momentum-building stories that address the universal stakeholder fear of non-delivery.",
+                    keyInsight: "The strongest projects are \"over-planned\" on staging, procurement, and early works from day one. Treating delivery as a design constraint (not an after-thought) prevents the vision from being eroded during construction.",
+                    signatureDeliverables: "Integrated Delivery Roadmap with explicit decision gates, Procurement & Packaging Strategy, Early Activation & Catalyst Plan.",
+                    proprietaryTools: "Delivery Risk Gateway Process (six mandatory checkpoints), Phasing Optimisation Engine (balances cashflow, risk, and market response).",
+                    successMetrics: "On-time / on-budget delivery rate, Milestone achievement, Cost certainty, Safety and quality performance."
+                },
+                {
+                    id: 4,
+                    name: "Management Domain (Governance & Stewardship)",
+                    corePurpose: "Maintain alignment, decision quality, and vision integrity over multi-year (often decade-long) project lifecycles.",
+                    pitchDeckContribution: "The governance and stewardship story - \"how we will stay on track, protect the vision, and adapt together.\"",
+                    keyInsight: "Most failed partnerships do not die from bad faith - they die from governance structures built for the easy times. Strong governance is the ultimate proof point that the vision is not just words on a page.",
+                    signatureDeliverables: "Joint Governance Charter with clear escalation paths, Adaptive Management Playbook, Vision Integrity Scorecard (quarterly health check).",
+                    proprietaryTools: "Governance Effectiveness Diagnostic (scored across 8 dimensions), Scenario Planning Toolkit, Vision Guardianship Protocol.",
+                    successMetrics: "Governance maturity score, Stakeholder satisfaction and alignment metrics, Vision integrity maintained over time, Adaptability to change."
+                },
+                {
+                    id: 5,
+                    name: "Community Experience Domain",
+                    corePurpose: "Create places that people actively choose, defend, and take pride in - turning stakeholders into long-term advocates rather than passive recipients.",
+                    pitchDeckContribution: "The human, lived-experience narrative that connects the project to real lives, aspirations, and belonging.",
+                    keyInsight: "The highest-value community outcomes are rarely the loudest demands - they are the quiet needs discovered through deliberate, repeated co-creation. Social licence is a leading indicator, not a lagging risk.",
+                    signatureDeliverables: "Experience Blueprint & Activation Strategy, Social Licence Trajectory Map, Community Stewardship Model.",
+                    proprietaryTools: "Co-Creation Workshop Series (structured 5-stage methodology), Social Licence Index (quantitative tracking), Experience Journey Mapping (pre- and post-occupancy).",
+                    successMetrics: "Community Net Promoter Score, Activation and usage rates, Diversity & inclusion metrics, Long-term stewardship commitment."
+                },
+                {
+                    id: 6,
+                    name: "Policy & Strategic Alignment Domain",
+                    corePurpose: "Explicitly align the Vision & Place with current and emerging government policy objectives, funding priorities, and strategic agendas.",
+                    pitchDeckContribution: "The powerful \"this project advances government priorities\" narrative - housing supply, service delivery, economic growth, sustainability, regional development, etc.",
+                    keyInsight: "This domain is the bridge that translates the project vision into language that resonates with ministers, departments, funding bodies, and political stakeholders. It must be repeatedly stress-tested and refreshed as policy landscapes evolve.",
+                    signatureDeliverables: "Policy Alignment Matrix, Government Objectives Mapping, Strategic Narrative Briefs.",
+                    proprietaryTools: "Policy Alignment Diagnostic + Narrative Stress-Test Workshop.",
+                    successMetrics: "Demonstrable contribution to key government targets, Speed of policy-level approvals, Stakeholder feedback on strategic fit."
+                }
+            ]
+        };
+
+        const segments = Array.from(document.querySelectorAll(".segment[data-domain-id]"));
+        const centre = document.querySelector("[data-centre-card]");
+        const card = document.getElementById("domain-card");
+        const cardTitle = document.getElementById("domain-card-title");
+        const cardContent = document.getElementById("domain-card-content");
+        const closeButton = card.querySelector(".domain-card__close");
+        let domainsById = new Map();
+        let centreData = fallbackDomainData.centre;
+
+        function segmentName(name) {
+            return name
+                .replace(/\s*\(.+\)\s*/g, "")
+                .replace(/\s+Domain$/i, "")
+                .replace("Policy & Strategic Alignment", "Policy Alignment")
+                .trim();
+        }
+
+        function labelLines(label) {
+            if (label === "Policy Alignment") {
+                return ["Policy", "Alignment"];
+            }
+
+            return [label];
+        }
+
+        function updateSegmentLabels(domains) {
+            domains.forEach((domain) => {
+                const label = document.querySelector(`[data-domain-label="${domain.id}"]`);
+                if (!label) {
+                    return;
+                }
+
+                const x = label.getAttribute("x");
+                label.replaceChildren();
+                labelLines(segmentName(domain.name)).forEach((line, index) => {
+                    const tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                    tspan.setAttribute("x", x);
+                    tspan.setAttribute("dy", index === 0 ? "0" : "10");
+                    tspan.textContent = line;
+                    label.append(tspan);
+                });
+            });
+        }
+
+        function renderSection(title, text) {
+            const section = document.createElement("section");
+            section.className = "domain-card__section";
+
+            const heading = document.createElement("h3");
+            heading.textContent = title;
+
+            const body = document.createElement("p");
+            body.textContent = text;
+
+            section.append(heading, body);
+            return section;
+        }
+
+        function renderCard(domain) {
+            cardTitle.textContent = domain.name;
+            cardContent.replaceChildren(
+                renderSection("Core purpose", domain.corePurpose),
+                renderSection("Key insight", domain.keyInsight)
+            );
+        }
+
+        function setActiveSegment(segment) {
+            segments.forEach((item) => item.classList.toggle("is-active", item === segment));
+            centre.classList.toggle("is-active", segment === centre);
+        }
+
+        function showCard(item) {
+            const domain = item === centre ? centreData : domainsById.get(Number(item.dataset.domainId));
+            if (!domain) {
+                return;
+            }
+
+            renderCard(domain);
+            setActiveSegment(item);
+            card.classList.add("is-visible");
+            card.setAttribute("aria-hidden", "false");
+        }
+
+        function closeCard() {
+            card.classList.remove("is-visible");
+            card.setAttribute("aria-hidden", "true");
+            setActiveSegment(null);
+        }
+
+        function setupInteractions() {
+            segments.forEach((segment) => {
+                segment.addEventListener("click", () => showCard(segment));
+                segment.addEventListener("keydown", (event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        showCard(segment);
+                    }
+                });
+            });
+
+            centre.addEventListener("click", () => showCard(centre));
+            centre.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    showCard(centre);
+                }
+            });
+
+            closeButton.addEventListener("click", closeCard);
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape") {
+                    closeCard();
+                }
+            });
+        }
+
+        async function loadDomainData() {
+            try {
+                const response = await fetch("sixDomains.JSON", { cache: "no-store" });
+                if (!response.ok) {
+                    throw new Error("Domain JSON could not be loaded");
+                }
+
+                return await response.json();
+            } catch (error) {
+                return fallbackDomainData;
+            }
+        }
+
+        loadDomainData().then((data) => {
+            domainsById = new Map(data.domains.map((domain) => [domain.id, domain]));
+            centreData = data.centre || fallbackDomainData.centre;
+            updateSegmentLabels(data.domains);
+            setupInteractions();
+        });
+    </script>
+</body>
+</html>
